@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/routing';
 import {
     Users,
     Globe,
@@ -12,6 +12,7 @@ import {
     Linkedin,
     ArrowRight
 } from 'lucide-react';
+import {useTranslations} from 'next-intl';
 
 export const metadata = {
     title: 'About Us | OpenStock',
@@ -19,6 +20,7 @@ export const metadata = {
 };
 
 export default function AboutPage() {
+    const t = useTranslations('About');
     return (
         <div className="max-w-5xl mx-auto pb-20 px-4">
             {/* Hero Section */}
@@ -30,11 +32,10 @@ export default function AboutPage() {
                 </div>
 
                 <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tight">
-                    Tools for Everyone.
+                    {t('heroTitle')}
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
-                    We believe financial intelligence shouldn't be locked behind paywalls.
-                    OpenStock is built by the community, for the community.
+                    {t('heroSubtitle')}
                 </p>
             </section>
 
@@ -42,20 +43,20 @@ export default function AboutPage() {
             <section className="grid md:grid-cols-3 gap-6 mb-24">
                 <FeatureCard
                     icon={<Globe className="text-blue-400" />}
-                    title="Open Access"
-                    desc="No premium tiers for core features. Real-time data and insights available to all, forever."
+                    title={t('openAccess')}
+                    desc={t('openAccessDesc')}
                     color="blue"
                 />
                 <FeatureCard
                     icon={<Code className="text-purple-400" />}
-                    title="Open Source"
-                    desc="Fully transparent codebase. Audit our algorithms, contribute features, and build with us."
+                    title={t('openSource')}
+                    desc={t('openSourceDesc')}
                     color="purple"
                 />
                 <FeatureCard
                     icon={<Heart className="text-red-400" />}
-                    title="Community Driven"
-                    desc="Powered by donations and volunteers. We answer to our users, not shareholders."
+                    title={t('communityDriven')}
+                    desc={t('communityDrivenDesc')}
                     color="red"
                 />
             </section>
@@ -63,16 +64,16 @@ export default function AboutPage() {
             {/* Story Section */}
             <section className="grid md:grid-cols-2 gap-12 items-center mb-24 bg-gray-900/30 p-8 md:p-12 rounded-3xl border border-gray-800">
                 <div className="space-y-6">
-                    <h2 className="text-3xl font-bold text-white">The Open Dev Society</h2>
+                    <h2 className="text-3xl font-bold text-white">{t('ourStory')}</h2>
                     <p className="text-gray-400 leading-relaxed text-lg">
-                        OpenStock was born from a simple frustration: why are powerful financial tools so expensive?
+                        {t('ourStoryDesc1')}
                     </p>
                     <p className="text-gray-400 leading-relaxed text-lg">
-                        We are a collective of developers, designers, and financial enthusiasts working under the <span className="text-teal-400 font-semibold">Open Dev Society</span> banner. Our mission is to democratize software by building high-quality, open-source alternatives to proprietary platforms.
+                        {t('ourStoryDesc2')}
                     </p>
                     <div className="pt-4">
                         <Link href="https://github.com/Open-Dev-Society" target="_blank" className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium transition-colors group">
-                            Visit our GitHub <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                            {t('visitGithub')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
                 </div>
@@ -88,7 +89,7 @@ export default function AboutPage() {
 
             {/* Team / Contributors */}
             <section className="text-center mb-20">
-                <h2 className="text-3xl font-bold text-white mb-10">Backed by Amazing Partners</h2>
+                <h2 className="text-3xl font-bold text-white mb-10">{t('partners')}</h2>
                 <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                     <div className="h-8 w-px bg-gray-700"></div>
                     <Link href="https://www.siray.ai" target="_blank" className="hover:opacity-100 transition-opacity flex items-center gap-2">

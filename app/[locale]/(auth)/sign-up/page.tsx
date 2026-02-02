@@ -8,12 +8,14 @@ import {INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS} from "@/
 import {CountrySelectField} from "@/components/forms/CountrySelectField";
 import FooterLink from "@/components/forms/FooterLink";
 import {signUpWithEmail} from "@/lib/actions/auth.actions";
-import {useRouter} from "next/navigation";
+import {useRouter} from "@/i18n/routing";
 import {toast} from "sonner";
 import OpenDevSocietyBranding from "@/components/OpenDevSocietyBranding";
 import React from "react";
+import {useTranslations} from 'next-intl';
 
 const SignUp = () => {
+    const t = useTranslations('Auth');
     const router = useRouter()
     const {
         register,
@@ -53,46 +55,46 @@ const SignUp = () => {
 
     return (
         <>
-            <h1 className="form-title">Sign Up & Personalize</h1>
+            <h1 className="form-title">{t('signUpAndPersonalize')}</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <InputField
                     name="fullName"
-                    label="Full Name"
-                    placeholder="Enter full name"
+                    label={t('fullName')}
+                    placeholder={t('fullNamePlaceholder')}
                     register={register}
                     error={errors.fullName}
-                    validation={{ required: 'Full name is required', minLength: 2 }}
+                    validation={{ required: t('fullNameRequired'), minLength: 2 }}
                 />
 
                 <InputField
                     name="email"
-                    label="Email"
-                    placeholder="opendevsociety@cc.cc"
+                    label={t('email')}
+                    placeholder={t('emailPlaceholder')}
                     register={register}
                     error={errors.email}
                     validation={{
-                      required: 'Email is required',
+                      required: t('emailRequired'),
                       pattern: {
                         value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/,
-                        message: 'Please enter a valid email address'
+                        message: t('emailInvalid')
                       }
                     }}
                 />
 
                 <InputField
                     name="password"
-                    label="Password"
-                    placeholder="Enter a strong password"
+                    label={t('password')}
+                    placeholder={t('passwordPlaceholderStrong')}
                     type="password"
                     register={register}
                     error={errors.password}
-                    validation={{ required: 'Password is required', minLength: 8 }}
+                    validation={{ required: t('passwordRequired'), minLength: 8 }}
                 />
 
                 <CountrySelectField
                     name="country"
-                    label="Country"
+                    label={t('country')}
                     control={control}
                     error={errors.country}
                     required
@@ -100,8 +102,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="investmentGoals"
-                    label="Investment Goals"
-                    placeholder="Select your investment goal"
+                    label={t('investmentGoals')}
+                    placeholder={t('investmentGoalPlaceholder')}
                     options={INVESTMENT_GOALS}
                     control={control}
                     error={errors.investmentGoals}
@@ -110,8 +112,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="riskTolerance"
-                    label="Risk Tolerance"
-                    placeholder="Select your risk level"
+                    label={t('riskTolerance')}
+                    placeholder={t('riskLevelPlaceholder')}
                     options={RISK_TOLERANCE_OPTIONS}
                     control={control}
                     error={errors.riskTolerance}
@@ -120,8 +122,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="preferredIndustry"
-                    label="Preferred Industry"
-                    placeholder="Select your preferred industry"
+                    label={t('preferredIndustry')}
+                    placeholder={t('industryPlaceholder')}
                     options={PREFERRED_INDUSTRIES}
                     control={control}
                     error={errors.preferredIndustry}
@@ -129,10 +131,10 @@ const SignUp = () => {
                 />
 
                 <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
-                    {isSubmitting ? 'Creating Account' : 'Start Your Investing Journey'}
+                    {isSubmitting ? t('creatingAccount') : t('startJourney')}
                 </Button>
 
-                <FooterLink text="Already have an account?" linkText="Sign in" href="/sign-in" />
+                <FooterLink text={t('alreadyHaveAccount')} linkText={t('signIn')} href="/sign-in" />
 
                 <OpenDevSocietyBranding outerClassName="mt-10 flex justify-center"/>
             </form>

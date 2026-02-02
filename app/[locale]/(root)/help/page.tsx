@@ -8,6 +8,7 @@ import {
   Github,
   ChevronDown
 } from 'lucide-react';
+import {useTranslations} from 'next-intl';
 
 export const metadata: Metadata = {
   title: 'Help Center | OpenStock',
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function HelpPage() {
+  const t = useTranslations('Help');
   const faqs = [
     {
       question: "Is OpenStock really free forever?",
@@ -46,38 +48,38 @@ export default function HelpPage() {
         <div className="inline-flex p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20 mb-4">
           <HelpCircle className="text-blue-400 h-8 w-8" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white">How can we help?</h1>
-        <p className="text-xl text-gray-400">Community-powered support for everyone.</p>
+        <h1 className="text-4xl md:text-5xl font-bold text-white">{t('title')}</h1>
+        <p className="text-xl text-gray-400">{t('subtitle')}</p>
       </div>
 
       {/* Quick Action Grid */}
       <div className="grid md:grid-cols-3 gap-4 mb-16">
         <HelpCard
           icon={<BookOpen className="text-teal-400" />}
-          title="Read Docs"
-          desc="Deep dive into features and API integration."
+          title={t('readDocs')}
+          desc={t('readDocsDesc')}
           link="/api-docs"
-          linkText="View Documentation"
+          linkText={t('viewDocs')}
         />
         <HelpCard
           icon={<MessageCircle className="text-purple-400" />}
-          title="Community Chat"
-          desc="Get real-time answers from other users."
+          title={t('chat')}
+          desc={t('chatDesc')}
           link="https://discord.gg/JkJ8kfxgxB"
-          linkText="Join Discord"
+          linkText={t('joinDiscord')}
         />
         <HelpCard
           icon={<Github className="text-white" />}
-          title="Report Bugs"
-          desc="Found an issue? Let our developers know."
+          title={t('reportBugs')}
+          desc={t('reportBugsDesc')}
           link="https://github.com/Open-Dev-Society/OpenStock/issues"
-          linkText="Open Issue"
+          linkText={t('openIssue')}
         />
       </div>
 
       {/* FAQs */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-4">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-4">{t('faqs')}</h2>
         <div className="grid gap-4">
           {faqs.map((faq, idx) => (
             <div key={idx} className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:bg-gray-800/50 transition-colors">
@@ -95,14 +97,14 @@ export default function HelpPage() {
 
       {/* Direct Contact */}
       <div className="mt-20 bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 text-center">
-        <h3 className="text-xl font-bold text-white mb-2">Still stuck?</h3>
+        <h3 className="text-xl font-bold text-white mb-2">{t('stillStuck')}</h3>
         <p className="text-gray-400 mb-6">Our team (and community) answers emails, usually entirely for free.</p>
         <a
           href="mailto:opendevsociety@gmail.com"
           className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
         >
           <Mail size={18} />
-          Contact Support
+          {t('contactSupport')}
         </a>
       </div>
 

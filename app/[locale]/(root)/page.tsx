@@ -8,52 +8,57 @@ import {
 } from "@/lib/constants";
 import {sendDailyNewsSummary} from "@/lib/inngest/functions";
 
+import {useTranslations} from 'next-intl';
+
 const Home = () => {
+    const t = useTranslations('Dashboard');
     const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`;
 
     return (
         <div className="flex min-h-screen home-wrapper">
             <section className="grid w-full gap-8 home-section">
-                <div className="md:col-span-1 xl:col-span-1">
+                {/* 第一行：三个组件各占 1/3 宽度 */}
+                <div className="xl:col-span-1">
                     <TradingViewWidget
-                        title="Global Market Overview"
+                        title={t('globalMarketOverview')}
                         scriptUrl={`${scriptUrl}market-overview.js`}
                         config={MARKET_OVERVIEW_WIDGET_CONFIG}
-                        className="custom-chart"
                         height={600}
                     />
                 </div>
-                <div className="md-col-span xl:col-span-2">
+                <div className="xl:col-span-1">
                     <TradingViewWidget
-                        title="Global Index Futures Watchlist"
-                        scriptUrl={`${scriptUrl}market-quotes.js`}
-                        config={MARKET_DATA_WIDGET_CONFIG}
-                        height={600}
-                    />
-                </div>
-            </section>
-            <section className="grid w-full gap-8 home-section">
-                <div className="h-full md:col-span-1 xl:col-span-2">
-                    <TradingViewWidget
-                        scriptUrl={`${scriptUrl}market-quotes.js`}
-                        config={MARKET_DATA_WIDGET_CONFIG}
-                        height={600}
-                    />
-                </div>
-                <div className="h-full md:col-span-1 xl:col-span-1">
-                    <TradingViewWidget
-                        title="Technical Summary"
+                        title={t('technicalSummary')}
                         scriptUrl={`${scriptUrl}technical-analysis.js`}
                         config={TECHNICAL_SUMMARY_CONFIG}
                         height={600}
                     />
                 </div>
-            </section>
-            <section className="grid w-full gap-8 home-section">
-                <div className="h-full w-full">
+                <div className="xl:col-span-1">
                     <TradingViewWidget
+                        title={t('topStories')}
                         scriptUrl={`${scriptUrl}timeline.js`}
                         config={TOP_STORIES_WIDGET_CONFIG}
+                        height={600}
+                    />
+                </div>
+
+                {/* 第二行：市场快照占据全宽 */}
+                <div className="xl:col-span-3">
+                    <TradingViewWidget
+                        title={t('marketSnapshot')}
+                        scriptUrl={`${scriptUrl}market-quotes.js`}
+                        config={MARKET_DATA_WIDGET_CONFIG}
+                        height={600}
+                    />
+                </div>
+
+                {/* 第三行：热力图占据全宽 */}
+                <div className="xl:col-span-3">
+                    <TradingViewWidget
+                        title={t('marketHeatmap')}
+                        scriptUrl={`${scriptUrl}stock-heatmap.js`}
+                        config={HEATMAP_WIDGET_CONFIG}
                         height={600}
                     />
                 </div>

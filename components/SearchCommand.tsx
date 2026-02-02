@@ -4,11 +4,13 @@ import { useEffect, useState } from "react"
 import { CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
 import {Button} from "@/components/ui/button";
 import {Loader2,  TrendingUp} from "lucide-react";
-import Link from "next/link";
 import {searchStocks} from "@/lib/actions/finnhub.actions";
 import {useDebounce} from "@/hooks/useDebounce";
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/routing';
 
 export default function SearchCommand({ renderAs = 'button', label = 'Add stock', initialStocks }: SearchCommandProps) {
+    const t = useTranslations('Dashboard');
     const [open, setOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
     const [loading, setLoading] = useState(false)
@@ -71,26 +73,26 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
             )}
             <CommandDialog open={open} onOpenChange={setOpen} className="search-dialog">
                 <div className="search-field">
-                    <CommandInput value={searchTerm} onValueChange={setSearchTerm} placeholder="Search indices or futures..." className="search-input" />
+                    <CommandInput value={searchTerm} onValueChange={setSearchTerm} placeholder={t('searchPlaceholder')} className="search-input" />
                     {loading && <Loader2 className="search-loader" />}
                 </div>
                 <CommandList className="search-list">
                     {loading ? (
-                        <CommandEmpty className="search-list-empty">Loading...</CommandEmpty>
+                        <CommandEmpty className="search-list-empty">{t('loading')}</CommandEmpty>
                     ) : displayStocks?.length === 0 ? (
                         <div className="search-list-indicator">
-                            {isSearchMode ? 'No results found' : 'No symbols available'}
+                            {isSearchMode ? t('noResults') : t('noSymbols')}
                         </div>
                     ) : (
                         <ul>
                             <div className="search-count">
-                                {isSearchMode ? 'Search results' : 'Global Favorites'}
+                                {isSearchMode ? t('searchResults') : t('globalFavorites')}
                                 {` `}({displayStocks?.length || 0})
                             </div>
                             {displayStocks?.map((stock, i) => (
                                 <li key={stock.symbol} className="search-item">
                                     <Link
-                                        href={`/stocks/${stock.symbol}`}
+                                        href={`/stocks/${stock.symbol}` as any}
                                         onClick={handleSelectStock}
                                         className="search-item-link"
                                     >

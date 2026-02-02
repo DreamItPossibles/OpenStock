@@ -8,6 +8,7 @@ import CreateAlertModal from "./CreateAlertModal";
 import WatchlistButton from "@/components/WatchlistButton";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { removeFromWatchlist } from "@/lib/actions/watchlist.actions";
+import {useTranslations} from 'next-intl';
 
 interface WatchlistTableProps {
     data: any[];
@@ -16,6 +17,7 @@ interface WatchlistTableProps {
 }
 
 export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTableProps) {
+    const t = useTranslations('Watchlist');
     const [stocks, setStocks] = useState(data);
 
     useEffect(() => {
@@ -66,8 +68,8 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
     if (!stocks || stocks.length === 0) {
         return (
             <div className="text-center py-12 bg-gray-900/50 rounded-lg border border-gray-800">
-                <h3 className="text-xl font-medium text-gray-300 mb-2">Your watchlist is empty</h3>
-                <p className="text-gray-500 mb-6">Add stocks to track their performance and set alerts.</p>
+                <h3 className="text-xl font-medium text-gray-300 mb-2">{t('empty')}</h3>
+                <p className="text-gray-500 mb-6">{t('addPrompt')}</p>
             </div>
         );
     }
@@ -77,13 +79,13 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
             <table className="w-full text-left text-sm border-collapse">
                 <thead className="bg-white/5 text-gray-400 font-medium border-b border-white/10">
                     <tr>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Category</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Symbol</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Price</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Change</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Day High</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Day Low</th>
-                        <th className="px-6 py-4 text-right font-semibold tracking-wide">Actions</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.category')}</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.symbol')}</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.price')}</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.change')}</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.high')}</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">{t('table.low')}</th>
+                        <th className="px-6 py-4 text-right font-semibold tracking-wide">{t('table.actions')}</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">

@@ -5,6 +5,7 @@ import useTradingViewWidget from "@/hooks/useTradingViewWidget";
 import { cn } from "@/lib/utils";
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLocale } from 'next-intl';
 
 interface TradingViewWidgetProps {
     title?: string;
@@ -16,6 +17,7 @@ interface TradingViewWidgetProps {
 }
 
 const TradingViewWidget = ({ title, scriptUrl, config, height = 600, className, allowExpand = false }: TradingViewWidgetProps) => {
+    const locale = useLocale();
     const [isExpanded, setIsExpanded] = useState(false);
     const [windowHeight, setWindowHeight] = useState(0);
 
@@ -32,6 +34,7 @@ const TradingViewWidget = ({ title, scriptUrl, config, height = 600, className, 
 
     const widgetConfig = {
         ...config,
+        locale: locale === 'zh' ? 'zh_CN' : 'en',
         height: currentHeight,
         width: "100%",
         autosize: true,

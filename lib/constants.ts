@@ -1,8 +1,8 @@
 export const NAV_ITEMS = [
-    { href: '/', label: 'Dashboard' },
-    { href: '/search', label: 'Search' },
-    { href: '/watchlist', label: 'Watchlist' },
-    { href: '/api-docs', label: 'API Docs' },
+    { href: '/', label: 'dashboard', key: 'dashboard' },
+    { href: '/search', label: 'search', key: 'search' },
+    { href: '/watchlist', label: 'watchlist', key: 'watchlist' },
+    { href: '/api-docs', label: 'apiDocs', key: 'apiDocs' },
 ];
 
 // Sign-up form select options
@@ -41,44 +41,44 @@ export const CONDITION_OPTIONS = [
 export const MARKET_OVERVIEW_WIDGET_CONFIG = {
     colorTheme: 'dark',
     dateRange: '12M',
-    locale: 'en',
+    locale: 'zh_CN',
     isTransparent: true,
     showFloatingTooltip: true,
     tabs: [
         {
-            title: 'Index Futures',
+            title: '股指期货',
             symbols: [
-                { s: 'FOREXCOM:SPX500', d: 'S&P 500' },
-                { s: 'FOREXCOM:NSXUSD', d: 'Nasdaq 100' },
-                { s: 'FOREXCOM:DJI', d: 'Dow 30' },
-                { s: 'FOREXCOM:CHINA50', d: 'China A50' }, // 修复感叹号：改用 FOREXCOM 兼容代码
-                { s: 'INDEX:HSI', d: 'Hang Seng' },
-                { s: 'INDEX:DAX', d: 'DAX 40' },
-                { s: 'INDEX:N225', d: 'Nikkei 225' },
-                { s: 'INDEX:FTSE', d: 'FTSE 100' },
+                { s: 'OANDA:SPX500USD', d: '标普 500' },
+                { s: 'OANDA:NAS100USD', d: '纳斯达克 100' },
+                { s: 'OANDA:US30USD', d: '道琼斯 30' },
+                { s: 'FOREXCOM:CHINA50', d: '中国 A50' },
+                { s: 'INDEX:HSI', d: '恒生指数' },
+                { s: 'INDEX:DAX', d: '德国 DAX 40' },
+                { s: 'FOREXCOM:JP225', d: '日经 225' },
+                { s: 'FOREXCOM:UK100', d: '富时 100' },
             ],
         },
         {
-            title: 'Commodities',
+            title: '大宗商品',
             symbols: [
-                { s: 'OANDA:XAUUSD', d: 'Gold' },
-                { s: 'TVC:USOIL', d: 'Crude Oil' },
-                { s: 'OANDA:XAGUSD', d: 'Silver' },
-                { s: 'OANDA:XCUUSD', d: 'Copper' },
-                { s: 'OANDA:NATGASUSD', d: 'Natural Gas' },
-                { s: 'OANDA:SOYBNUSD', d: 'Soybeans' }, // 更换为更兼容的符号
-                { s: 'FOREXCOM:CORN', d: 'Corn' },
-                { s: 'FOREXCOM:WHEAT', d: 'Wheat' },
+                { s: 'OANDA:XAUUSD', d: '黄金' },
+                { s: 'TVC:USOIL', d: '原油' },
+                { s: 'OANDA:XAGUSD', d: '白银' },
+                { s: 'OANDA:XCUUSD', d: '期铜' },
+                { s: 'OANDA:NATGASUSD', d: '天然气' },
+                { s: 'OANDA:SOYBNUSD', d: '大豆' },
+                { s: 'OANDA:CORNUSD', d: '玉米' },
+                { s: 'OANDA:WHEATUSD', d: '小麦' },
             ],
         },
         {
-            title: 'Currencies',
+            title: '外汇',
             symbols: [
-                { s: 'TVC:DXY', d: 'Dollar Index' },
-                { s: 'FX_IDC:USDCNH', d: 'USD/CNH' },
-                { s: 'FX:EURUSD', d: 'EUR/USD' },
-                { s: 'FX:USDJPY', d: 'USD/JPY' },
-                { s: 'FX:GBPUSD', d: 'GBP/USD' },
+                { s: 'TVC:DXY', d: '美元指数' },
+                { s: 'FX_IDC:USDCNH', d: '离岸人民币' },
+                { s: 'FX:EURUSD', d: '欧元/美元' },
+                { s: 'FX:USDJPY', d: '美元/日元' },
+                { s: 'FX:GBPUSD', d: '英镑/美元' },
             ],
         },
     ],
@@ -92,21 +92,15 @@ export const MARKET_OVERVIEW_WIDGET_CONFIG = {
 
 // 英伟财情风格的技术分析汇总 (Technical Summary)
 export const TECHNICAL_SUMMARY_CONFIG = {
-    symbols: [
-        ["S&P 500", "FOREXCOM:SPX500"],
-        ["Nasdaq 100", "FOREXCOM:NSXUSD"],
-        ["China A50", "FOREXCOM:CHINA50"],
-        ["Gold", "OANDA:XAUUSD"],
-        ["Crude Oil", "TVC:USOIL"],
-        ["Bitcoin", "TVC:BTCUSD"]
-    ],
+    interval: "1h",
+    width: "100%",
+    isTransparent: true,
+    height: 600,
+    symbol: "AMEX:SPY",
     showIntervalTabs: true,
     displayMode: "single",
-    locale: "en",
-    colorTheme: "dark",
-    isTransparent: true,
-    width: "100%",
-    height: 400
+    locale: "zh_CN",
+    colorTheme: "dark"
 };
 
 export const HEATMAP_WIDGET_CONFIG = {
@@ -115,7 +109,7 @@ export const HEATMAP_WIDGET_CONFIG = {
     blockColor: 'change',
     grouping: 'sector',
     isTransparent: true,
-    locale: 'en',
+    locale: 'zh_CN',
     symbolUrl: '',
     colorTheme: 'dark',
     hasTopBar: true,
@@ -131,50 +125,53 @@ export const TOP_STORIES_WIDGET_CONFIG = {
     feedMode: 'market',
     colorTheme: 'dark',
     isTransparent: true,
-    locale: 'en',
-    market: 'futures', // 切换为期货消息
+    locale: 'zh_CN',
+    market: 'all', 
     width: '100%',
-    height: '600',
+    height: 600,
 };
 
 export const MARKET_DATA_WIDGET_CONFIG = {
-    title: 'Global Market Snapshot',
+    title: '全球市场快照',
     width: '100%',
-    height: 800, // 增加高度以展示更多商品
-    locale: 'en',
+    height: 800,
+    locale: 'zh_CN',
     showSymbolLogo: true,
     colorTheme: 'dark',
     isTransparent: false,
     backgroundColor: '#0F0F0F',
     symbolsGroups: [
         {
-            name: 'Key Indices',
+            name: '主要指数',
             symbols: [
-                { name: 'FOREXCOM:SPX500', displayName: 'S&P 500' },
-                { name: 'FOREXCOM:NSXUSD', displayName: 'Nasdaq 100' },
-                { name: 'FOREXCOM:CHINA50', displayName: 'China A50' },
-                { name: 'INDEX:HSI', displayName: 'Hang Seng' },
-                { name: 'INDEX:DAX', displayName: 'DAX 40' },
-                { name: 'TVC:DXY', displayName: 'Dollar Index' },
+                { name: 'FOREXCOM:SPX500', displayName: '标普 500' },
+                { name: 'FOREXCOM:NSXUSD', displayName: '纳斯达克 100' },
+                { name: 'FOREXCOM:CHINA50', displayName: '中国 A50' },
+                { name: 'INDEX:HSI', displayName: '恒生指数' },
+                { name: 'INDEX:DAX', displayName: '德国 DAX 40' },
+                { name: 'TVC:DXY', displayName: '美元指数' },
             ],
         },
         {
-            name: 'Energy & Metals',
+            name: '能源与金属',
             symbols: [
-                { name: 'TVC:USOIL', displayName: 'WTI Crude' },
-                { name: 'TVC:UKOIL', displayName: 'Brent Oil' },
-                { name: 'OANDA:XAUUSD', displayName: 'Gold' },
-                { name: 'OANDA:XAGUSD', displayName: 'Silver' },
-                { name: 'FOREXCOM:COPPER', displayName: 'Copper' },
+                { name: 'TVC:USOIL', displayName: 'WTI 原油' },
+                { name: 'TVC:UKOIL', displayName: '布伦特原油' },
+                { name: 'OANDA:XAUUSD', displayName: '黄金' },
+                { name: 'OANDA:XAGUSD', displayName: '白银' },
+                { name: 'FOREXCOM:COPPER', displayName: '期铜' },
+                { name: 'OANDA:XPDUSD', displayName: '钯金' },
+                { name: 'OANDA:XPTUSD', displayName: '铂金' },
             ],
         },
         {
-            name: 'Agriculture',
+            name: '农产品',
             symbols: [
-                { name: 'OANDA:SOYBNUSD', displayName: 'Soybeans' },
-                { name: 'FOREXCOM:CORN', displayName: 'Corn' },
-                { name: 'FOREXCOM:WHEAT', displayName: 'Wheat' },
-                { name: 'FOREXCOM:COTTON', displayName: 'Cotton' },
+                { name: 'OANDA:SOYBNUSD', displayName: '大豆' },
+                { name: 'OANDA:CORNUSD', displayName: '玉米' },
+                { name: 'OANDA:WHEATUSD', displayName: '小麦' },
+                { name: 'OANDA:SUGARUSD', displayName: '白糖' },
+                { name: 'TVC:COFFEE', displayName: '咖啡' },
             ],
         },
     ],
@@ -184,7 +181,7 @@ export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
     isTransparent: true,
-    locale: 'en',
+    locale: 'zh_CN',
     width: '100%',
     height: 170,
 });
@@ -199,7 +196,7 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     hide_volume: false,
     hotlist: false,
     interval: 'D',
-    locale: 'en',
+    locale: 'zh_CN',
     save_image: false,
     style: 1,
     symbol: symbol.toUpperCase(),
@@ -225,7 +222,7 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     hide_volume: false,
     hotlist: false,
     interval: 'D',
-    locale: 'en',
+    locale: 'zh_CN',
     save_image: false,
     style: 10,
     symbol: symbol.toUpperCase(),
@@ -245,7 +242,7 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
     isTransparent: 'true',
-    locale: 'en',
+    locale: 'zh_CN',
     width: '100%',
     height: 400,
     interval: '1h',
@@ -256,7 +253,7 @@ export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
     isTransparent: 'true',
-    locale: 'en',
+    locale: 'zh_CN',
     width: '100%',
     height: 440,
 });
@@ -265,7 +262,7 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
     isTransparent: 'true',
-    locale: 'en',
+    locale: 'zh_CN',
     width: '100%',
     height: 464,
     displayMode: 'regular',
@@ -296,9 +293,9 @@ export const POPULAR_STOCK_SYMBOLS = [
     'NG=F',      // Natural Gas Futures
     
     // --- Major Market Leaders (For context) ---
-    'AAPL',      // Apple
-    'NVDA',      // NVIDIA
-    'TSLA',      // Tesla
+    'BTCUSD',    // Bitcoin
+    'ETHUSD',    // Ethereum
+    'USO',       // US Oil Fund
 ];
 
 export const NO_MARKET_NEWS =
