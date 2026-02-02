@@ -23,6 +23,8 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
     const userId = session?.user?.id;
     const isInWatchlist = userId ? await isStockInWatchlist(userId, symbol) : false;
 
+    const isIndexOrFutures = symbol.startsWith('^') || symbol.includes('=') || symbol.includes(':');
+
     return (
         <div className="flex min-h-screen p-4 md:p-6 lg:p-8">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
@@ -68,17 +70,21 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
                         height={400}
                     />
 
-                    <TradingViewWidget
-                        scriptUrl={`${scriptUrl}company-profile.js`}
-                        config={COMPANY_PROFILE_WIDGET_CONFIG(symbol)}
-                        height={440}
-                    />
+                    {!isIndexOrFutures && (
+                        <>
+                            <TradingViewWidget
+                                scriptUrl={`${scriptUrl}company-profile.js`}
+                                config={COMPANY_PROFILE_WIDGET_CONFIG(symbol)}
+                                height={440}
+                            />
 
-                    <TradingViewWidget
-                        scriptUrl={`${scriptUrl}financials.js`}
-                        config={COMPANY_FINANCIALS_WIDGET_CONFIG(symbol)}
-                        height={800}
-                    />
+                            <TradingViewWidget
+                                scriptUrl={`${scriptUrl}financials.js`}
+                                config={COMPANY_FINANCIALS_WIDGET_CONFIG(symbol)}
+                                height={800}
+                            />
+                        </>
+                    )}
                 </div>
             </section>
         </div>

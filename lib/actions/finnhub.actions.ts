@@ -61,11 +61,12 @@ export async function getWatchlistData(symbols: string[]) {
             price: quote?.c || 0,
             change: quote?.d || 0,
             changePercent: quote?.dp || 0,
+            high: quote?.h || 0,
+            low: quote?.l || 0,
             currency: profile?.currency || 'USD',
             name: profile?.name || sym,
             logo: profile?.logo,
-            marketCap: profile?.marketCapitalization,
-            peRatio: 0 // Finnhub 'quote' and 'profile2' don't easily give real-time PE. Might need 'metric' endpoint, but skipping for now to save rate limits.
+            type: profile?.ticker ? 'Stock' : 'Index/Futures'
         };
     });
 
@@ -126,8 +127,8 @@ export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> 
             // If none collected, fall through to general news
         }
 
-        // General market news fallback or when no symbols provided
-        const generalUrl = `${FINNHUB_BASE_URL}/news?category=general&token=${token}`;
+        // General market news fallback: focus on commodities and forex for macro context
+        const generalUrl = `${FINNHUB_BASE_URL}/news?category=forex&token=${token}`;
         const general = await fetchJSON<RawNewsArticle[]>(generalUrl, 300);
 
         const seen = new Set<string>();

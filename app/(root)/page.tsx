@@ -3,7 +3,8 @@ import {
     HEATMAP_WIDGET_CONFIG,
     MARKET_DATA_WIDGET_CONFIG,
     MARKET_OVERVIEW_WIDGET_CONFIG,
-    TOP_STORIES_WIDGET_CONFIG
+    TOP_STORIES_WIDGET_CONFIG,
+    TECHNICAL_SUMMARY_CONFIG
 } from "@/lib/constants";
 import {sendDailyNewsSummary} from "@/lib/inngest/functions";
 
@@ -15,7 +16,7 @@ const Home = () => {
             <section className="grid w-full gap-8 home-section">
                 <div className="md:col-span-1 xl:col-span-1">
                     <TradingViewWidget
-                        title="Market Overview"
+                        title="Global Market Overview"
                         scriptUrl={`${scriptUrl}market-overview.js`}
                         config={MARKET_OVERVIEW_WIDGET_CONFIG}
                         className="custom-chart"
@@ -24,9 +25,9 @@ const Home = () => {
                 </div>
                 <div className="md-col-span xl:col-span-2">
                     <TradingViewWidget
-                        title="Stock Heatmap"
-                        scriptUrl={`${scriptUrl}stock-heatmap.js`}
-                        config={HEATMAP_WIDGET_CONFIG}
+                        title="Global Index Futures Watchlist"
+                        scriptUrl={`${scriptUrl}market-quotes.js`}
+                        config={MARKET_DATA_WIDGET_CONFIG}
                         height={600}
                     />
                 </div>
@@ -41,12 +42,21 @@ const Home = () => {
                 </div>
                 <div className="h-full md:col-span-1 xl:col-span-1">
                     <TradingViewWidget
+                        title="Technical Summary"
+                        scriptUrl={`${scriptUrl}technical-analysis.js`}
+                        config={TECHNICAL_SUMMARY_CONFIG}
+                        height={600}
+                    />
+                </div>
+            </section>
+            <section className="grid w-full gap-8 home-section">
+                <div className="h-full w-full">
+                    <TradingViewWidget
                         scriptUrl={`${scriptUrl}timeline.js`}
                         config={TOP_STORIES_WIDGET_CONFIG}
                         height={600}
                     />
                 </div>
-
             </section>
         </div>
     )

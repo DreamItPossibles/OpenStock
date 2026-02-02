@@ -1,16 +1,15 @@
 services:
   openstock:
-    build:
-      context: .
-      extra_hosts:
-        - "mongodb:host-gateway"
+    image: openstock-app:latest
+    container_name: openstock-app
     ports:
-      - "3000:3000"
+      - "3001:3000"
     env_file:
       - .env
     restart: unless-stopped
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
 
   mongodb:
     image: mongo:7

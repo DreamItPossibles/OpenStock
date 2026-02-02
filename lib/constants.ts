@@ -37,67 +37,80 @@ export const CONDITION_OPTIONS = [
     { value: 'less', label: 'Less than (<)' },
 ];
 
-// TradingView Charts
+// TradingView Charts (Investing.com / 英伟财情 Style)
 export const MARKET_OVERVIEW_WIDGET_CONFIG = {
-    colorTheme: 'dark', // dark mode
-    dateRange: '12M', // last 12 months
-    locale: 'en', // language
-    largeChartUrl: '', // link to a large chart if needed
-    isTransparent: true, // makes background transparent
-    showFloatingTooltip: true, // show tooltip on hover
-    plotLineColorGrowing: '#0FEDBE', // line color when price goes up
-    plotLineColorFalling: '#0FEDBE', // line color when price falls
-    gridLineColor: 'rgba(240, 243, 250, 0)', // grid line color
-    scaleFontColor: '#DBDBDB', // font color for scale
-    belowLineFillColorGrowing: 'rgba(41, 98, 255, 0.12)', // fill under line when growing
-    belowLineFillColorFalling: 'rgba(41, 98, 255, 0.12)', // fill under line when falling
-    belowLineFillColorGrowingBottom: 'rgba(41, 98, 255, 0)',
-    belowLineFillColorFallingBottom: 'rgba(41, 98, 255, 0)',
-    symbolActiveColor: 'rgba(15, 237, 190, 0.05)', // highlight color for active symbol
+    colorTheme: 'dark',
+    dateRange: '12M',
+    locale: 'en',
+    isTransparent: true,
+    showFloatingTooltip: true,
     tabs: [
         {
-            title: 'Financial',
+            title: 'Index Futures',
             symbols: [
-                { s: 'NYSE:JPM', d: 'JPMorgan Chase' },
-                { s: 'NYSE:WFC', d: 'Wells Fargo Co New' },
-                { s: 'NYSE:BAC', d: 'Bank Amer Corp' },
-                { s: 'NYSE:HSBC', d: 'Hsbc Hldgs Plc' },
-                { s: 'NYSE:C', d: 'Citigroup Inc' },
-                { s: 'NYSE:MA', d: 'Mastercard Incorporated' },
+                { s: 'FOREXCOM:SPX500', d: 'S&P 500' },
+                { s: 'FOREXCOM:NSXUSD', d: 'Nasdaq 100' },
+                { s: 'FOREXCOM:DJI', d: 'Dow 30' },
+                { s: 'FOREXCOM:CHINA50', d: 'China A50' }, // 修复感叹号：改用 FOREXCOM 兼容代码
+                { s: 'INDEX:HSI', d: 'Hang Seng' },
+                { s: 'INDEX:DAX', d: 'DAX 40' },
+                { s: 'INDEX:N225', d: 'Nikkei 225' },
+                { s: 'INDEX:FTSE', d: 'FTSE 100' },
             ],
         },
         {
-            title: 'Technology',
+            title: 'Commodities',
             symbols: [
-                { s: 'NASDAQ:AAPL', d: 'Apple' },
-                { s: 'NASDAQ:GOOGL', d: 'Alphabet' },
-                { s: 'NASDAQ:MSFT', d: 'Microsoft' },
-                { s: 'NASDAQ:META', d: 'Meta Platforms' },
-                { s: 'NYSE:ORCL', d: 'Oracle Corp' },
-                { s: 'NASDAQ:INTC', d: 'Intel Corp' },
+                { s: 'OANDA:XAUUSD', d: 'Gold' },
+                { s: 'TVC:USOIL', d: 'Crude Oil' },
+                { s: 'OANDA:XAGUSD', d: 'Silver' },
+                { s: 'OANDA:XCUUSD', d: 'Copper' },
+                { s: 'OANDA:NATGASUSD', d: 'Natural Gas' },
+                { s: 'OANDA:SOYBNUSD', d: 'Soybeans' }, // 更换为更兼容的符号
+                { s: 'FOREXCOM:CORN', d: 'Corn' },
+                { s: 'FOREXCOM:WHEAT', d: 'Wheat' },
             ],
         },
         {
-            title: 'Services',
+            title: 'Currencies',
             symbols: [
-                { s: 'NASDAQ:AMZN', d: 'Amazon' },
-                { s: 'NYSE:BABA', d: 'Alibaba Group Hldg Ltd' },
-                { s: 'NYSE:T', d: 'At&t Inc' },
-                { s: 'NYSE:WMT', d: 'Walmart' },
-                { s: 'NYSE:V', d: 'Visa' },
+                { s: 'TVC:DXY', d: 'Dollar Index' },
+                { s: 'FX_IDC:USDCNH', d: 'USD/CNH' },
+                { s: 'FX:EURUSD', d: 'EUR/USD' },
+                { s: 'FX:USDJPY', d: 'USD/JPY' },
+                { s: 'FX:GBPUSD', d: 'GBP/USD' },
             ],
         },
     ],
-    support_host: 'https://www.tradingview.com', // TradingView host
-    backgroundColor: '#141414', // background color
-    width: '100%', // full width
-    height: 600, // height in px
-    showSymbolLogo: true, // show logo next to symbols
-    showChart: true, // display mini chart
+    support_host: 'https://www.tradingview.com',
+    backgroundColor: '#141414',
+    width: '100%',
+    height: 600,
+    showSymbolLogo: true,
+    showChart: true,
+};
+
+// 英伟财情风格的技术分析汇总 (Technical Summary)
+export const TECHNICAL_SUMMARY_CONFIG = {
+    symbols: [
+        ["S&P 500", "FOREXCOM:SPX500"],
+        ["Nasdaq 100", "FOREXCOM:NSXUSD"],
+        ["China A50", "FOREXCOM:CHINA50"],
+        ["Gold", "OANDA:XAUUSD"],
+        ["Crude Oil", "TVC:USOIL"],
+        ["Bitcoin", "TVC:BTCUSD"]
+    ],
+    showIntervalTabs: true,
+    displayMode: "single",
+    locale: "en",
+    colorTheme: "dark",
+    isTransparent: true,
+    width: "100%",
+    height: 400
 };
 
 export const HEATMAP_WIDGET_CONFIG = {
-    dataSource: 'SPX500',
+    dataSource: 'AllWorld',
     blockSize: 'market_cap_basic',
     blockColor: 'change',
     grouping: 'sector',
@@ -105,12 +118,10 @@ export const HEATMAP_WIDGET_CONFIG = {
     locale: 'en',
     symbolUrl: '',
     colorTheme: 'dark',
-    exchanges: [],
-    hasTopBar: false,
-    isDataSetEnabled: false,
+    hasTopBar: true,
+    isDataSetEnabled: true,
     isZoomEnabled: true,
     hasSymbolTooltip: true,
-    isMonoSize: false,
     width: '100%',
     height: '600',
 };
@@ -121,15 +132,15 @@ export const TOP_STORIES_WIDGET_CONFIG = {
     colorTheme: 'dark',
     isTransparent: true,
     locale: 'en',
-    market: 'stock',
+    market: 'futures', // 切换为期货消息
     width: '100%',
     height: '600',
 };
 
 export const MARKET_DATA_WIDGET_CONFIG = {
-    title: 'Stocks',
+    title: 'Global Market Snapshot',
     width: '100%',
-    height: 600,
+    height: 800, // 增加高度以展示更多商品
     locale: 'en',
     showSymbolLogo: true,
     colorTheme: 'dark',
@@ -137,35 +148,33 @@ export const MARKET_DATA_WIDGET_CONFIG = {
     backgroundColor: '#0F0F0F',
     symbolsGroups: [
         {
-            name: 'Financial',
+            name: 'Key Indices',
             symbols: [
-                { name: 'NYSE:JPM', displayName: 'JPMorgan Chase' },
-                { name: 'NYSE:WFC', displayName: 'Wells Fargo Co New' },
-                { name: 'NYSE:BAC', displayName: 'Bank Amer Corp' },
-                { name: 'NYSE:HSBC', displayName: 'Hsbc Hldgs Plc' },
-                { name: 'NYSE:C', displayName: 'Citigroup Inc' },
-                { name: 'NYSE:MA', displayName: 'Mastercard Incorporated' },
+                { name: 'FOREXCOM:SPX500', displayName: 'S&P 500' },
+                { name: 'FOREXCOM:NSXUSD', displayName: 'Nasdaq 100' },
+                { name: 'FOREXCOM:CHINA50', displayName: 'China A50' },
+                { name: 'INDEX:HSI', displayName: 'Hang Seng' },
+                { name: 'INDEX:DAX', displayName: 'DAX 40' },
+                { name: 'TVC:DXY', displayName: 'Dollar Index' },
             ],
         },
         {
-            name: 'Technology',
+            name: 'Energy & Metals',
             symbols: [
-                { name: 'NASDAQ:AAPL', displayName: 'Apple' },
-                { name: 'NASDAQ:GOOGL', displayName: 'Alphabet' },
-                { name: 'NASDAQ:MSFT', displayName: 'Microsoft' },
-                { name: 'NASDAQ:FB', displayName: 'Meta Platforms' },
-                { name: 'NYSE:ORCL', displayName: 'Oracle Corp' },
-                { name: 'NASDAQ:INTC', displayName: 'Intel Corp' },
+                { name: 'TVC:USOIL', displayName: 'WTI Crude' },
+                { name: 'TVC:UKOIL', displayName: 'Brent Oil' },
+                { name: 'OANDA:XAUUSD', displayName: 'Gold' },
+                { name: 'OANDA:XAGUSD', displayName: 'Silver' },
+                { name: 'FOREXCOM:COPPER', displayName: 'Copper' },
             ],
         },
         {
-            name: 'Services',
+            name: 'Agriculture',
             symbols: [
-                { name: 'NASDAQ:AMZN', displayName: 'Amazon' },
-                { name: 'NYSE:BABA', displayName: 'Alibaba Group Hldg Ltd' },
-                { name: 'NYSE:T', displayName: 'At&t Inc' },
-                { name: 'NYSE:WMT', displayName: 'Walmart' },
-                { name: 'NYSE:V', displayName: 'Visa' },
+                { name: 'OANDA:SOYBNUSD', displayName: 'Soybeans' },
+                { name: 'FOREXCOM:CORN', displayName: 'Corn' },
+                { name: 'FOREXCOM:WHEAT', displayName: 'Wheat' },
+                { name: 'FOREXCOM:COTTON', displayName: 'Cotton' },
             ],
         },
     ],
@@ -264,77 +273,44 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
 });
 
 export const POPULAR_STOCK_SYMBOLS = [
-    // Tech Giants (the big technology companies)
-    'AAPL',
-    'MSFT',
-    'GOOGL',
-    'AMZN',
-    'TSLA',
-    'META',
-    'NVDA',
-    'NFLX',
-    'ORCL',
-    'CRM',
-
-    // Growing Tech Companies
-    'ADBE',
-    'INTC',
-    'AMD',
-    'PYPL',
-    'UBER',
-    'ZOOM',
-    'SPOT',
-    'SQ',
-    'SHOP',
-    'ROKU',
-
-    // Newer Tech Companies
-    'SNOW',
-    'PLTR',
-    'COIN',
-    'RBLX',
-    'DDOG',
-    'CRWD',
-    'NET',
-    'OKTA',
-    'TWLO',
-    'ZM',
-
-    // Consumer & Delivery Apps
-    'DOCU',
-    'PTON',
-    'PINS',
-    'SNAP',
-    'LYFT',
-    'DASH',
-    'ABNB',
-    'RIVN',
-    'LCID',
-    'NIO',
-
-    // International Companies
-    'XPEV',
-    'LI',
-    'BABA',
-    'JD',
-    'PDD',
-    'TME',
-    'BILI',
-    'DIDI',
-    'GRAB',
-    'SE',
+    // --- Global Index Futures (Proxied by Indices in Finnhub) ---
+    '^GSPC',     // S&P 500 Index
+    '^NDX',      // Nasdaq 100 Index
+    '^DJI',      // Dow Jones Industrial Average
+    '^RUT',      // Russell 2000 Index
+    '^VIX',      // CBOE Volatility Index
+    
+    // --- European & Asian Major Indices ---
+    '^GDAXI',    // DAX Performance-Index (Germany)
+    '^FTSE',     // FTSE 100 Index (UK)
+    '^FCHI',     // CAC 40 Index (France)
+    '^N225',     // Nikkei 225 (Japan)
+    '^HSI',      // Hang Seng Index (Hong Kong)
+    '^STI',      // Straits Times Index (Singapore)
+    '^AXJO',     // S&P/ASX 200 (Australia)
+    
+    // --- Commodity Futures (Finnhub supported) ---
+    'CL=F',      // Crude Oil Futures
+    'GC=F',      // Gold Futures
+    'SI=F',      // Silver Futures
+    'NG=F',      // Natural Gas Futures
+    
+    // --- Major Market Leaders (For context) ---
+    'AAPL',      // Apple
+    'NVDA',      // NVIDIA
+    'TSLA',      // Tesla
 ];
 
 export const NO_MARKET_NEWS =
     '<p class="mobile-text" style="margin:0 0 20px 0;font-size:16px;line-height:1.6;color:#4b5563;">No market news available today. Please check back tomorrow.</p>';
 
 export const WATCHLIST_TABLE_HEADER = [
-    'Company',
+    'Category',
     'Symbol',
     'Price',
     'Change',
-    'Market Cap',
-    'P/E Ratio',
+    'Day High',
+    'Day Low',
     'Alert',
     'Action',
 ];

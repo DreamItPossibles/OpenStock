@@ -71,20 +71,20 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
             )}
             <CommandDialog open={open} onOpenChange={setOpen} className="search-dialog">
                 <div className="search-field">
-                    <CommandInput value={searchTerm} onValueChange={setSearchTerm} placeholder="Search stocks..." className="search-input" />
+                    <CommandInput value={searchTerm} onValueChange={setSearchTerm} placeholder="Search indices or futures..." className="search-input" />
                     {loading && <Loader2 className="search-loader" />}
                 </div>
                 <CommandList className="search-list">
                     {loading ? (
-                        <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
+                        <CommandEmpty className="search-list-empty">Loading...</CommandEmpty>
                     ) : displayStocks?.length === 0 ? (
                         <div className="search-list-indicator">
-                            {isSearchMode ? 'No results found' : 'No stocks available'}
+                            {isSearchMode ? 'No results found' : 'No symbols available'}
                         </div>
                     ) : (
                         <ul>
                             <div className="search-count">
-                                {isSearchMode ? 'Search results' : 'Popular stocks'}
+                                {isSearchMode ? 'Search results' : 'Global Favorites'}
                                 {` `}({displayStocks?.length || 0})
                             </div>
                             {displayStocks?.map((stock, i) => (

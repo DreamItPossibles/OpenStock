@@ -47,6 +47,8 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                     price: fresh.price,
                                     change: fresh.change,
                                     changePercent: fresh.changePercent,
+                                    high: fresh.high,
+                                    low: fresh.low,
                                 };
                             }
                             return existing;
@@ -75,11 +77,12 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
             <table className="w-full text-left text-sm border-collapse">
                 <thead className="bg-white/5 text-gray-400 font-medium border-b border-white/10">
                     <tr>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Company</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">Category</th>
                         <th className="px-6 py-4 font-semibold tracking-wide">Symbol</th>
                         <th className="px-6 py-4 font-semibold tracking-wide">Price</th>
                         <th className="px-6 py-4 font-semibold tracking-wide">Change</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Market Cap</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">Day High</th>
+                        <th className="px-6 py-4 font-semibold tracking-wide">Day Low</th>
                         <th className="px-6 py-4 text-right font-semibold tracking-wide">Actions</th>
                     </tr>
                 </thead>
@@ -90,22 +93,11 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                             <tr key={stock.symbol} className="hover:bg-white/5 transition-colors group">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-4">
-                                        {stock.logo ? (
-                                            <div className="w-10 h-10 relative rounded-full overflow-hidden bg-white/10 shadow-sm border border-white/5">
-                                                <Image
-                                                    src={stock.logo}
-                                                    alt={stock.symbol}
-                                                    fill
-                                                    className="object-contain p-1.5"
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-xs font-bold text-white shadow-sm border border-white/5">
-                                                {stock.symbol[0]}
-                                            </div>
-                                        )}
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-xs font-bold text-indigo-300 shadow-sm border border-white/5">
+                                            {stock.symbol.startsWith('^') ? 'IDX' : 'FUT'}
+                                        </div>
                                         <div className="flex flex-col">
-                                            <span className="font-semibold text-white text-base">{stock.name}</span>
+                                            <span className="font-semibold text-white text-base line-clamp-1">{stock.name}</span>
                                         </div>
                                     </div>
                                 </td>
@@ -124,7 +116,10 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 text-gray-400 font-medium">
-                                    {formatNumber(stock.marketCap)}
+                                    {formatCurrency(stock.high)}
+                                </td>
+                                <td className="px-6 py-4 text-gray-400 font-medium">
+                                    {formatCurrency(stock.low)}
                                 </td>
                                 <td className="px-6 py-4 text-right">
                                     <div className="flex items-center justify-end space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
