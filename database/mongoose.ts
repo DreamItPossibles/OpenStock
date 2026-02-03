@@ -29,6 +29,12 @@ if (!cached) {
 }
 
 export const connectToDatabase = async () => {
+    // 关键：在 Docker 构建阶段返回一个模拟对象，防止读取属性时报错
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+        console.warn('Using mock DB connection during build phase');
+        return { connection: { readyState: 1 } } as any;
+    }
+
     if (!MONGODB_URI) {
         throw new Error("MongoDB URI is missing");
     }
